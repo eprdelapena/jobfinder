@@ -1,16 +1,12 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import HomeCards from './components/HomeCards'
-import JobListing from './components/JobListing'
+import MainLayout from './layout/MainLayout'
+import Homepage from './layout/Homepage'
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <HomeCards />
-      <JobListing />
+      <MainLayout />
+      <Homepage />
     </>
     
   )
