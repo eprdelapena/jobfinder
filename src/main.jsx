@@ -8,6 +8,7 @@ import ErrorPage from './layout/ErrorPage.jsx'
 import Homepage from './layout/Homepage.jsx'
 import Jobpage from './layout/Jobpage.jsx'
 import SingleJobPage from './layout/SingleJobPage.jsx'
+import AddJobPage from './layout/AddJobPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,12 +17,20 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: '/',
+        element: <Homepage />
+      },
+      {
         path: '/homepage',
         element: <Homepage />
       },
       {
         path: '/jobs',
         element: <Jobpage />
+      },
+      {
+        path: '/addjobs',
+        element: <AddJobPage />
       },
       {
         path: '/jobs/:profileID',
