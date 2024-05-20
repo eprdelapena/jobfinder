@@ -7,6 +7,7 @@ import MainLayout from './layout/MainLayout.jsx'
 import ErrorPage from './layout/ErrorPage.jsx'
 import Homepage from './layout/Homepage.jsx'
 import Jobpage from './layout/Jobpage.jsx'
+import SingleJobPage from './layout/SingleJobPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/jobs',
         element: <Jobpage />
+      },
+      {
+        path: '/jobs/:profileID',
+        element: <SingleJobPage />
       }
     ]
   }
