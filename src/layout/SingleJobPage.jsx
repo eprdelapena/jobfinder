@@ -2,15 +2,24 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { FaMapMarker } from 'react-icons/fa';
+import { deleteData } from '../function/deletedata';
+import { useNavigate } from 'react-router-dom';
 
 const SingleJobPage = () => {
   let params = useParams().profileID;
   const [jobs, setJobs] = useState([]);
+  const apiURL = `http://localhost:8000/jobs/${params}`;
+  const navigate = useNavigate();
+  const deletes = () => {
+    deleteData(apiURL).then(() => {
+      console.log("Data Deleted");
+    })
+    return navigate('/jobs');
+  }
 
   useEffect(() => {
     const fetchJobs = async () => {
         try{
-            let apiURL = `/api/jobs/${params}`;
             const request = await fetch(apiURL, {
                 method: 'GET'
             });
@@ -94,6 +103,7 @@ const SingleJobPage = () => {
                 >Edit Job</a>
               <button
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                onClick={deletes}
               >
                 Delete Job
               </button>

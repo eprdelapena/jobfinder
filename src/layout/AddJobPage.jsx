@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react' 
 import { postData } from '../function/postdata'; 
+import { useNavigate } from 'react-router-dom'; //1. Import this
 
 const AddJobPage = () => {
   
@@ -14,7 +15,9 @@ const AddJobPage = () => {
   const [companyPhone, setCompanyPhone] = useState("");
   const [companyDescription, setCompanyDescription] = useState("");
 
-  const submit = (e) => { 
+  const navigate = useNavigate(); // 3. initialize this must initialize outside a functino
+
+  const submit = (e) => {  //2. Upon clicking submit form this will run
     e.preventDefault();
     const url = 'api/jobs'
     let types = {
@@ -34,7 +37,7 @@ const AddJobPage = () => {
     });
     console.log(result);
     
-    return types
+    return navigate('/jobs'); //4. specify redirect URL
   }
 
 
