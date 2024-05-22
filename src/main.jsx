@@ -9,6 +9,7 @@ import Homepage from './layout/Homepage.jsx'
 import Jobpage from './layout/Jobpage.jsx'
 import SingleJobPage from './layout/SingleJobPage.jsx'
 import AddJobPage from './layout/AddJobPage.jsx'
+import EditJobPage from './layout/EditJobPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/jobs/:profileID',
         element: <SingleJobPage />
+      },
+      {
+        path: '/editjob/:profileID',
+        element: <EditJobPage/>
       }
     ]
   }

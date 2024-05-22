@@ -10,7 +10,7 @@ const SingleJobPage = () => {
   const [jobs, setJobs] = useState([]);
   const apiURL = `http://localhost:8000/jobs/${params}`;
   const navigate = useNavigate();
-  const deletes = () => {
+  const deletes = () => { 
     deleteData(apiURL).then(() => {
       console.log("Data Deleted");
     })

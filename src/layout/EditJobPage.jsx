@@ -1,55 +1,74 @@
 import React from 'react'
-import { useState } from 'react' 
-import { postData } from '../function/postdata'; 
-import { useNavigate } from 'react-router-dom'; //1. Import this
+import {useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom';
+import { getData } from '../function/getdata';
+import { updateData } from '../function/updatedata';
+import { useNavigate } from 'react-router-dom';
 
-const AddJobPage = () => {
-  
-  const [jobType, setJobType] = useState("Full-Time");
-  const [jobListing, setJobListing] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [salary, setSalary] = useState("Under $50K");
-  const [location, setLocation] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyEmail, setCompanyEmail] = useState("");
-  const [companyPhone, setCompanyPhone] = useState("");
-  const [companyDescription, setCompanyDescription] = useState("");
 
-  const navigate = useNavigate(); // 3. initialize this must initialize outside a functino
+const EditJobPage = () => {
 
-  const submit = (e) => {  //2. Upon clicking submit form this will run
-    e.preventDefault();
-    const url = '/api/jobs'
-    let types = {
-        "title": jobListing,
-        "type": jobType,
-        "description": jobDescription,
-        "salary": salary,
-        "company": {
-            "name": companyName,
-            "description": companyDescription,
-            "contactEmail": companyEmail,
-            "contactPhone": companyPhone
-        }
+    const [jobType, setjobType] = useState('');
+    const [jobListing, setJobListing] = useState("");
+    const [jobDescription, setJobDescription] = useState("");
+    const [salary, setSalary] = useState("Under $50K");
+    const [location, setLocation] = useState("");
+    const [companyName, setCompanyName] = useState("");
+    const [companyEmail, setCompanyEmail] = useState("");
+    const [companyPhone, setCompanyPhone] = useState("");
+    const [companyDescription, setCompanyDescription] = useState("");
+    const navigate = useNavigate();
+
+    let params = useParams().profileID;
+    const apiURL = `http://localhost:8000/jobs/${params}`;
+    useEffect(() => {
+      getData(apiURL).then((job) => {
+        setjobType(job.type);
+        setJobListing(job.title);
+        setJobDescription(job.description);
+        setSalary(job.salary);
+        setLocation(job.location);
+        setCompanyName(job.company.name);
+        setCompanyEmail(job.company.contactEmail);
+        setCompanyPhone(job.company.contactPhone);
+        setCompanyDescription(job.company.description);
+      })
+    }, [])
+
+    const submit = (e) => {  //2. Upon clicking submit form this will run
+      e.preventDefault();
+      let types = {
+          "title": jobListing,
+          "type": jobType,
+          "description": jobDescription,
+          "location": location,
+          "salary": salary,
+          "company": {
+              "name": companyName,
+              "description": companyDescription,
+              "contactEmail": companyEmail,
+              "contactPhone": companyPhone
+          }
+      }
+
+      let result = updateData(apiURL, types).then(() => {
+        console.log("Data Updated");
+      });
+
+      console.log(result);
+
+      return navigate('/jobs');
     }
-    let result = postData(url, types).then(() => {
-      console.log("data submitted");
-    });
-    console.log(result);
-    
-    return navigate('/jobs'); //4. specify redirect URL
-  }
-
 
   return (
     <>
-      <section className="bg-indigo-50">
+    <section className="bg-indigo-50">
       <div className="container m-auto max-w-2xl py-24">
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
         >
-          <form onSubmit={submit}> 
-            <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
+          <form onSubmit={submit}>
+            <h2 className="text-3xl text-center font-semibold mb-6">Edit Job</h2>
 
             <div className="mb-4">
               <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
@@ -59,7 +78,7 @@ const AddJobPage = () => {
                 name="type"
                 className="border rounded w-full py-2 px-3"
                 value={jobType}
-                onChange={(e) => {setJobType(e.target.value)}} 
+                onChange={(e) => {setjobType(e.target.value)}}
                 required
               >
                 <option value="Full-Time">Full-Time</option>
@@ -182,7 +201,7 @@ const AddJobPage = () => {
                 id="contact_email"
                 name="contact_email"
                 className="border rounded w-full py-2 px-3"
-                placeholder="Email address for applicants"
+                placeholder="Email address htmlFor applicants"
                 value={companyEmail}
                 onChange={(e) => {setCompanyEmail(e.target.value)}}
                 required
@@ -198,7 +217,7 @@ const AddJobPage = () => {
                 id="contact_phone"
                 name="contact_phone"
                 className="border rounded w-full py-2 px-3"
-                placeholder="Optional phone for applicants"
+                placeholder="Optional phone htmlFor applicants"
                 value={companyPhone}
                 onChange={(e) => {setCompanyPhone(e.target.value)}}
               />
@@ -209,7 +228,7 @@ const AddJobPage = () => {
                 className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Add Job
+                Update
               </button>
             </div>
           </form>
@@ -220,4 +239,6 @@ const AddJobPage = () => {
   )
 }
 
-export default AddJobPage
+export default EditJobPage
+
+

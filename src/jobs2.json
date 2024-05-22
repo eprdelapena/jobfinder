@@ -15,18 +15,18 @@
       }
     },
     {
-      "id": "2",
       "title": "Front-End Engineer (React & Redux)",
       "type": "Full-Time",
-      "location": "BGC, Taguig",
       "description": "Join our team as a Front-End Developer in sunny Miami, FL. We are looking for a motivated individual with a passion for crafting beautiful and responsive web applications. Experience with UI/UX design principles and a strong attention to detail are highly desirable.",
+      "location": "Miami, FL",
       "salary": "Php70K - Php80K",
       "company": {
-        "name": "Veneer Solutions",
-        "description": "Veneer Solutions is a creative agency specializing in digital design and development. Our team is dedicated to pushing the boundaries of creativity and innovation to deliver exceptional results for our clients.",
-        "contactEmail": "contact@loremipsum.com",
+        "name": "Facebook",
+        "description": "Facebook is a creative agency specializing in digital design and development. Our team is dedicated to pushing the boundaries of creativity and innovation to deliver exceptional results for our clients. gwllo",
+        "contactEmail": "contact@loremipsum.comasdasd",
         "contactPhone": "555-555-5555"
-      }
+      },
+      "id": "2"
     },
     {
       "id": "3",
