@@ -6,10 +6,11 @@ import { deleteData } from '../function/deletedata';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+
 const SingleJobPage = () => {
   let params = useParams().profileID;
   const [jobs, setJobs] = useState([]);
-  const apiURL = `http://localhost:8000/jobs/${params}`;
+  const apiURL = `https://eprdelapena.github.io/jobdata/jobs.json`;
   const navigate = useNavigate();
   const deletes = () => { 
     deleteData(apiURL).then(() => {
@@ -25,7 +26,10 @@ const SingleJobPage = () => {
                 method: 'GET'
             });
             const response = await request.json();
-            setJobs(response);
+            const elementIndex = response.findIndex((element) => {
+              return element.id === params.toString();
+            })
+            setJobs(response[elementIndex]);
         }
         catch(error){
             console.error(error);

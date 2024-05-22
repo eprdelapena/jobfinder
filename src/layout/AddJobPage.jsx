@@ -19,7 +19,7 @@ const AddJobPage = () => {
 
   const submit = (e) => {  //2. Upon clicking submit form this will run
     e.preventDefault();
-    const url = '/api/jobs'
+    const url = 'https://eprdelapena.github.io/jobdata/jobs.json'
     let types = {
         "title": jobListing,
         "type": jobType,
