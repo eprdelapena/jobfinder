@@ -1,7 +1,9 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState } from 'react' 
+import { postData } from '../function/postdata'; 
 
 const AddJobPage = () => {
+  
   const [jobType, setJobType] = useState("Full-Time");
   const [jobListing, setJobListing] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -12,8 +14,9 @@ const AddJobPage = () => {
   const [companyPhone, setCompanyPhone] = useState("");
   const [companyDescription, setCompanyDescription] = useState("");
 
-  const submit = (e) => {
+  const submit = (e) => { 
     e.preventDefault();
+    const url = 'api/jobs'
     let types = {
         "title": jobListing,
         "type": jobType,
@@ -26,8 +29,10 @@ const AddJobPage = () => {
             "contactPhone": companyPhone
         }
     }
-    console.log("helloworld");
-    console.log(types);
+    let result = postData(url, types).then(() => {
+      console.log("data submitted");
+    });
+    console.log(result);
     
     return types
   }
@@ -40,7 +45,7 @@ const AddJobPage = () => {
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
         >
-          <form onSubmit={submit}>
+          <form onSubmit={submit}> 
             <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
             <div className="mb-4">
@@ -51,7 +56,7 @@ const AddJobPage = () => {
                 name="type"
                 className="border rounded w-full py-2 px-3"
                 value={jobType}
-                onChange={(e) => {setJobType(e.target.value)}}
+                onChange={(e) => {setJobType(e.target.value)}} 
                 required
               >
                 <option value="Full-Time">Full-Time</option>
